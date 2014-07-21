@@ -125,13 +125,13 @@ func main() {
 }
 
 func shelfEnvVars(shelfHost string, commit string, env map[string]string) string {
-	buf := new(bytes.Buffer)
+	buf := &bytes.Buffer{}
 	tw := tar.NewWriter(buf)
 
 	for key, value := range env {
 		hdr := &tar.Header{
 			Name: key,
-			Mode: 0400,
+			Mode: 0444,
 			ModTime: time.Now(),
 			Size: int64(len(value)),
 		}
